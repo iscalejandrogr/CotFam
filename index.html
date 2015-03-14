@@ -1,0 +1,71 @@
+<!DOCTYPE html-->
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.mobile-1.4.5.min.js"></script>
+<title>Aplicación Móvil</title>
+<script type="text/javascript">
+$(document).ready(function inicio(){
+  var btnenviar=$("#enviar");
+  btnenviar.click(function enviaDatos(){
+  var nom=$("#nombre").val();
+  var app=$("#apellido_p").val();
+  var apm=$("#apellido_m").val();
+  var tel=$("#telefono").val();
+  var email=$("#email").val();
+  var dir=$("#dir").val();
+  var obs=$("#obs").val(); 
+    $.ajax({
+    type:"POST",
+    url:"http://itslmoviles.260mb.net/envio.php",
+    data:"nombre="+nom+"&apellidoP="+app+"&apellidoM="+apm+"&telefono="+tel+"&email="+email+"&direc="+dir+"&observ="+obs,
+    success: recepcion
+    });
+  });
+     
+  function recepcion(datos){
+  //alert(datos);
+  var x=$("#resultado");
+  x.html(datos);
+  }   
+});
+
+</script>
+</head>
+<body>
+<div data-role="page" id="Principal" data-theme="a">
+  <div data-role="header" >
+  <p style="text-align:center">Envio de datos desde un Formulario</p>
+  </div>
+  <div data-role="content">
+      <form method="POST" action="envio.php">
+	  <div class="ui-field-contain">
+	  <label for="nombre">Nombre: </label>
+	  <input type="text" name="nombre" id="nombre" >
+	  <label for="apellido_p">Apellido Paterno: </label>
+	  <input type="text" name="apellido_p" id="apellido_p" >
+	  <label for="apellido_m">Apellido Materno: </label>
+	  <input type="text" name="apellido_m" id="apellido_m" >
+	  <label for="telefono">Telefono: </label>
+	  <input type="text" name="telefono" id="telefono" placeholder="10 digítos" >	  
+	   <label for="email">Email: </label>
+	  <input type="text" name="email" id="email" placeholder="cuenta@servico.extensión" >
+	  <label for="dir">Dirección: </label>
+	  <input type="text" name="dir" id="dir" >
+	  <label for="obs">Observaciones: </label>
+	  <textarea placeholder="Escribe tus observaciones" id="obs" name="obs"></textarea>
+	  </div>
+	  <input type="button" name="enviar" id="enviar" value="Enviar" >	 
+      </form>
+      <div data-transition="flip" id="resultado" >
+      </div>
+  </div>
+  <div data-role="footer">
+  <p style="text-align:center; font-size:10px;">Derechos resevados</p>
+  </div>
+</div>
+</body>
+</html>
+
