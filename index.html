@@ -35,32 +35,200 @@ $(document).ready(function inicio(){
 </script>
 </head>
 <body>
-<div data-role="page" id="Principal" data-theme="a">
+<div data-role="page" id="MenuPrincipal" data-theme="a">
   <div data-role="header" >
-  <p style="text-align:center">Envio de datos desde un Formulario</p>
+  <p style="text-align:center">Cotizar Gastos Familiares</p>
+  <div data-role="navbar">
+    <ul>
+      <li><a href="#MenuPrincipal" class="ui-btn ui-icon-home ui-btn-icon-left" >Menú Principal</a></li>
+      <li><a href="#InfoFamiliar" class="ui-btn ui-icon-info ui-btn-icon-left" >Información familiar</a></li>
+    </ul>
+    </div>
   </div>
-  <div data-role="content">
-      <form method="POST" action="envio.php">
-	  <div class="ui-field-contain">
-	  <label for="nombre">Nombre: </label>
-	  <input type="text" name="nombre" id="nombre" >
-	  <label for="apellido_p">Apellido Paterno: </label>
-	  <input type="text" name="apellido_p" id="apellido_p" >
-	  <label for="apellido_m">Apellido Materno: </label>
-	  <input type="text" name="apellido_m" id="apellido_m" >
-	  <label for="telefono">Telefono: </label>
-	  <input type="text" name="telefono" id="telefono" placeholder="10 digítos" >	  
-	   <label for="email">Email: </label>
-	  <input type="text" name="email" id="email" placeholder="cuenta@servico.extensión" >
-	  <label for="dir">Dirección: </label>
-	  <input type="text" name="dir" id="dir" >
-	  <label for="obs">Observaciones: </label>
-	  <textarea placeholder="Escribe tus observaciones" id="obs" name="obs"></textarea>
-	  </div>
-	  <input type="button" name="enviar" id="enviar" value="Enviar" >	 
-      </form>
-      <div data-transition="flip" id="resultado" >
+  <div data-role="content">      
+    <ul data-role="listview">
+      <li><a href="#RegistrarGastos">Registrar Gastos</a></li>
+      <li><a href="#RegistrarIngresos">Registrar Ingresos</a></li>
+      <li><a href="#ConsultarGastos">Consultar Gastos</a></li>
+      <li><a href="#ConsultarIngresos">Consultar Ingresos</a></li>
+      <li><a href="#BalanceGeneral">Balance General</a></li>
+    </ul>
+  </div> 	    
+  <div data-role="footer">
+  <p style="text-align:center; font-size:10px;">Derechos resevados</p>
+  </div>
+</div>
+
+<div data-role="page" id="RegistrarGastos" data-theme="a">
+  <div data-role="header" >
+    <p style="text-align:center">Registrar Gastos</p>
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+  </div>
+  <div data-role="content">      	  
+      <div data-role="collapsible">
+	  <h1>Aceo Personal</h1>
+	  <fieldset class="ui-field-contain">
+	    <label for="opComida">Selecciona una opción:</label>
+	    <select name="opComida" id="opComida">
+	      <option value="ap_dete">Desodorante</option>
+	      <option value="ap_crpe">Crema para peinar</option>
+	      <option value="ap_jaba">Jabón Baño</option>
+	      <option value="ap_piza">Pintura zapatos</option>
+	      <option value="ap_shpo">Shampoo</option>	      
+	    </select>
+	    <label for="PrecioAceoP">Precio:</label>
+	    <input type="text" value="" name="PrecioAceoP" id="PrecioAceoP">	    
+	  </fieldset>
+	  <input type="button" value="Registrar gasto" id="btnRgAP" name="btnRgAP"> 
       </div>
+      <div data-role="collapsible">
+	  <h1>Auto</h1>
+	  <fieldset class="ui-field-contain">
+	    <label for="opComida">Selecciona una opción:</label>
+	    <select name="opComida" id="opComida">
+	      <option value="au_acfr">Aceite Frenos</option>
+	      <option value="au_acmo">Aceite Motor</option>
+	      <option value="au_ante">Anticongelante</option>
+	      <option value="au_gana">Gasolina</option>      
+	    </select>
+	    <label for="PrecioAuto">Precio:</label>
+	    <input type="text" value="" name="PrecioAuto" id="PrecioAuto">	    
+	  </fieldset>
+	  <input type="button" value="Registrar gasto" id="btnRgAUTO" name="btnRgAUTO"> 
+      </div>
+      <div data-role="collapsible">
+	  <h1>Casa</h1>
+	  <fieldset class="ui-field-contain">
+	    <label for="opComida">Selecciona una opción:</label>
+	    <select name="opComida" id="opComida">
+	      <option value="ca_gas">Gas</option>
+	      <option value="ca_reta">Renta</option>     
+	    </select>
+	    <label for="PrecioCasa">Precio:</label>
+	    <input type="text" value="" name="PrecioCasa" id="PrecioCasa">	    
+	  </fieldset>
+	  <input type="button" value="Registrar gasto" id="btnRgCASA" name="btnRgCASA"> 
+      </div>
+      <div data-role="collapsible">
+	  <h1>Bebes</h1>
+	  <fieldset class="ui-field-contain">
+	    <label for="opBebes">Selecciona una opción:</label>
+	    <select name="opBebes" id="opBebes">
+	      <option value="be_leca">Leche en caja</option>
+	      <option value="be_lepo">Leche en polvo</option>
+	      <option value="be_paes">Pañales</option>
+	      <option value="be_tohu">Toallas Humedas</option>     
+	    </select>
+	    <label for="PrecioBebes">Precio:</label>
+	    <input type="text" value="" name="PrecioBebes" id="PrecioBebes">	    
+	  </fieldset>
+	  <input type="button" value="Registrar gasto" id="btnRgBE" name="btnRgBE"> 
+      </div>
+      <div data-role="collapsible">
+	  <h1>Comida</h1>
+	  <fieldset class="ui-field-contain">
+	    <label for="opComida">Selecciona una opción:</label>
+	    <select name="opComida" id="opComida">
+	      <option value="com_acte">Aceite</option>
+	      <option value="com_agem">Agua embotellada</option>
+	      <option value="com_aroz">Arroz</option>
+	      <option value="com_azar">Azucar</option>
+	      <option value="com_capo">Carne de pollo</option>
+	      <option value="com_cace">Carne de cerdo</option>
+	      <option value="com_care">Carne de res</option>	      
+	      <option value="com_frol">Frijoles</option>
+	      <option value="com_frta">Fruta</option>
+	      <option value="com_jaon">Jamon</option>
+	      <option value="com_pan">Pan</option>
+	      <option value="com_quso">Queso</option>
+	      <option value="com_sal">Sal</option>
+	      <option value="com_toas">Tortillas</option>      	      
+	      <option value="com_vera">Verdura</option>	      
+	    </select>
+	    <label for="PrecioComida">Precio:</label>
+	    <input type="text" value="" name="PrecioComida" id="PrecioComida">	    
+	  </fieldset>
+	  <input type="button" value="Registrar gasto" id="btnRegCo" name="btnRegCo"> 
+      </div>
+      <div data-role="collapsible">
+	  <h1>Limpieza</h1>
+	  <fieldset class="ui-field-contain">
+	    <label for="opComida">Selecciona una opción:</label>
+	    <select name="opComida" id="opComida">
+	      <option value="li_clro">Cloro</option>
+	      <option value="li_jaro">Jabón de Ropa</option>
+	      <option value="li_jatr">Jabón de Trastes</option>      
+	    </select>
+	    <label for="PrecioLimp">Precio:</label>
+	    <input type="text" value="" name="PrecioLimp" id="PrecioLimp">	    
+	  </fieldset>
+	  <input type="button" value="Registrar gasto" id="btnRgLI" name="btnRgLI"> 
+      </div>
+  </div>
+  <div data-role="footer">
+  <p style="text-align:center; font-size:10px;">Derechos resevados</p>
+  </div>
+</div>
+
+<div data-role="page" id="RegistrarIngresos" data-theme="a">
+  <div data-role="header" >
+    <p style="text-align:center">Registrar Ingresos</p>
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+  </div>
+  <div data-role="content">      	  
+	  <a href="#" data-role="button" id="">Registrar Ingresos</a>	 	  
+  </div>
+  <div data-role="footer">
+  <p style="text-align:center; font-size:10px;">Derechos resevados</p>
+  </div>
+</div>
+
+<div data-role="page" id="ConsultarGastos" data-theme="a">
+  <div data-role="header" >
+    <p style="text-align:center">Consultar Gastos</p>
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+  </div>
+  <div data-role="content">      	  
+	  <a href="#" data-role="button" id="">Consultar gastos</a>	 	  
+  </div>
+  <div data-role="footer">
+  <p style="text-align:center; font-size:10px;">Derechos resevados</p>
+  </div>
+</div>
+
+<div data-role="page" id="ConsultarIngresos" data-theme="a">
+  <div data-role="header" >
+    <p style="text-align:center">Consultar Ingresos</p>
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+  </div>
+  <div data-role="content">      	  
+	  <a href="#" data-role="button" id="">Consultar Ingresos</a>	 	  
+  </div>
+  <div data-role="footer">
+  <p style="text-align:center; font-size:10px;">Derechos resevados</p>
+  </div>
+</div>
+
+<div data-role="page" id="BalanceGeneral" data-theme="a">
+  <div data-role="header" >
+    <p style="text-align:center">Balance General</p>
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+  </div>
+  <div data-role="content">      	  
+	  <a href="#" data-role="button" id="">Balance General</a>	 	  
+  </div>
+  <div data-role="footer">
+  <p style="text-align:center; font-size:10px;">Derechos resevados</p>
+  </div>
+</div>
+
+<div data-role="page" id="InfoFamiliar" data-theme="a">
+  <div data-role="header" >
+    <p style="text-align:center">Información Familiar</p>
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+  </div>
+  <div data-role="content">      	  
+	  <div id="respInfoFam"></div>
   </div>
   <div data-role="footer">
   <p style="text-align:center; font-size:10px;">Derechos resevados</p>
@@ -68,4 +236,3 @@ $(document).ready(function inicio(){
 </div>
 </body>
 </html>
-
