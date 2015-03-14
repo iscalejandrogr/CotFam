@@ -8,28 +8,107 @@
 <title>Aplicación Móvil</title>
 <script type="text/javascript">
 $(document).ready(function inicio(){
-  var btnenviar=$("#enviar");
-  btnenviar.click(function enviaDatos(){
-  var nom=$("#nombre").val();
-  var app=$("#apellido_p").val();
-  var apm=$("#apellido_m").val();
-  var tel=$("#telefono").val();
-  var email=$("#email").val();
-  var dir=$("#dir").val();
-  var obs=$("#obs").val(); 
+  var btnRgAP=$("#btnRgAP");//Registro de gastos de Aseo personal
+  btnRgAP.click(function enviaDatos(){
+  var opAseoP=$("#opAseoP").val();
+  var PrecioAceoP=$("#PrecioAceoP").val(); 
     $.ajax({
     type:"POST",
-    url:"http://itslmoviles.260mb.net/envio.php",
-    data:"nombre="+nom+"&apellidoP="+app+"&apellidoM="+apm+"&telefono="+tel+"&email="+email+"&direc="+dir+"&observ="+obs,
-    success: recepcion
+    //url:"http://itslmoviles.260mb.net/regAseoP.php",
+    url:"regAseoP.php",
+    data:"opAseoP="+opAseoP+"&PrecioAceoP="+PrecioAceoP,
+    success: recepcionAceoP
     });
-  });
-     
-  function recepcion(datos){
-  //alert(datos);
-  var x=$("#resultado");
+  });     
+  function recepcionAceoP(datos){
+  var x=$("#respOPAseoP");
   x.html(datos);
   }   
+  
+  var btnRgAUTO=$("#btnRgAUTO");//Registro de gastos de Auto
+  btnRgAUTO.click(function enviaDatos(){
+  var opAuto=$("#opAuto").val();
+  var PrecioAuto=$("#PrecioAuto").val(); 
+    $.ajax({
+    type:"POST",
+    //url:"http://itslmoviles.260mb.net/regAseoP.php",
+    url:"regAuto.php",
+    data:"opAuto="+opAuto+"&PrecioAuto="+PrecioAuto,
+    success: recepcionAuto
+    });
+  });     
+  function recepcionAuto(datos){
+  var x=$("#respOPAuto");
+  x.html(datos);
+  } 
+  
+  var btnRgCASA=$("#btnRgCASA");//Registro de gastos de Casa
+  btnRgCASA.click(function enviaDatos(){
+  var opCasa=$("#opCasa").val();
+  var PrecioCasa=$("#PrecioCasa").val(); 
+    $.ajax({
+    type:"POST",
+    //url:"http://itslmoviles.260mb.net/regAseoP.php",
+    url:"regCasa.php",
+    data:"opCasa="+opCasa+"&PrecioCasa="+PrecioCasa,
+    success: recepcionCasa
+    });
+  });     
+  function recepcionCasa(datos){
+  var x=$("#respOPCasa");
+  x.html(datos);
+  } 
+  
+    var btnRgBE=$("#btnRgBE");//Registro de gastos de Bebes
+  btnRgBE.click(function enviaDatos(){
+  var opBebes=$("#opBebes").val();
+  var PrecioBebes=$("#PrecioBebes").val(); 
+    $.ajax({
+    type:"POST",
+    //url:"http://itslmoviles.260mb.net/regAseoP.php",
+    url:"regBebes.php",
+    data:"opBebes="+opBebes+"&PrecioBebes="+PrecioBebes,
+    success: recepcionBebes
+    });
+  });     
+  function recepcionBebes(datos){
+  var x=$("#respOPBebes");
+  x.html(datos);
+  } 
+  
+  var btnRegCo=$("#btnRegCo");//Registro de gastos de Comida
+  btnRegCo.click(function enviaDatos(){
+  var opComida=$("#opComida").val();
+  var PrecioComida=$("#PrecioComida").val(); 
+    $.ajax({
+    type:"POST",
+    //url:"http://itslmoviles.260mb.net/regAseoP.php",
+    url:"regComida.php",
+    data:"opComida="+opComida+"&PrecioComida="+PrecioComida,
+    success: recepcionComida
+    });
+  });     
+  function recepcionComida(datos){
+  var x=$("#respOPComida");
+  x.html(datos);
+  } 
+  
+  var btnRgLI=$("#btnRgLI");//Registro de gastos de Limpieza
+  btnRgLI.click(function enviaDatos(){
+  var opLimpieza=$("#opLimpieza").val();
+  var PrecioLimp=$("#PrecioLimp").val(); 
+    $.ajax({
+    type:"POST",
+    //url:"http://itslmoviles.260mb.net/regAseoP.php",
+    url:"regLimpieza.php",
+    data:"opLimpieza="+opLimpieza+"&PrecioLimp="+PrecioLimp,
+    success: recepcionLimpieza
+    });
+  });     
+  function recepcionLimpieza(datos){
+  var x=$("#respOPLimpieza");
+  x.html(datos);
+  } 
 });
 
 </script>
@@ -62,14 +141,14 @@ $(document).ready(function inicio(){
 <div data-role="page" id="RegistrarGastos" data-theme="a">
   <div data-role="header" >
     <p style="text-align:center">Registrar Gastos</p>
-    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Inicio</a> 
   </div>
   <div data-role="content">      	  
       <div data-role="collapsible">
 	  <h1>Aceo Personal</h1>
 	  <fieldset class="ui-field-contain">
-	    <label for="opComida">Selecciona una opción:</label>
-	    <select name="opComida" id="opComida">
+	    <label for="opAseoP">Selecciona una opción:</label>
+	    <select name="opAseoP" id="opAseoP">
 	      <option value="ap_dete">Desodorante</option>
 	      <option value="ap_crpe">Crema para peinar</option>
 	      <option value="ap_jaba">Jabón Baño</option>
@@ -80,12 +159,13 @@ $(document).ready(function inicio(){
 	    <input type="text" value="" name="PrecioAceoP" id="PrecioAceoP">	    
 	  </fieldset>
 	  <input type="button" value="Registrar gasto" id="btnRgAP" name="btnRgAP"> 
+	  <div id="respOPAseoP"></div>
       </div>
       <div data-role="collapsible">
 	  <h1>Auto</h1>
 	  <fieldset class="ui-field-contain">
-	    <label for="opComida">Selecciona una opción:</label>
-	    <select name="opComida" id="opComida">
+	    <label for="opAuto">Selecciona una opción:</label>
+	    <select name="opAuto" id="opAuto">
 	      <option value="au_acfr">Aceite Frenos</option>
 	      <option value="au_acmo">Aceite Motor</option>
 	      <option value="au_ante">Anticongelante</option>
@@ -95,20 +175,8 @@ $(document).ready(function inicio(){
 	    <input type="text" value="" name="PrecioAuto" id="PrecioAuto">	    
 	  </fieldset>
 	  <input type="button" value="Registrar gasto" id="btnRgAUTO" name="btnRgAUTO"> 
-      </div>
-      <div data-role="collapsible">
-	  <h1>Casa</h1>
-	  <fieldset class="ui-field-contain">
-	    <label for="opComida">Selecciona una opción:</label>
-	    <select name="opComida" id="opComida">
-	      <option value="ca_gas">Gas</option>
-	      <option value="ca_reta">Renta</option>     
-	    </select>
-	    <label for="PrecioCasa">Precio:</label>
-	    <input type="text" value="" name="PrecioCasa" id="PrecioCasa">	    
-	  </fieldset>
-	  <input type="button" value="Registrar gasto" id="btnRgCASA" name="btnRgCASA"> 
-      </div>
+	  <div id="respOPAuto"></div>
+      </div>      
       <div data-role="collapsible">
 	  <h1>Bebes</h1>
 	  <fieldset class="ui-field-contain">
@@ -117,19 +185,35 @@ $(document).ready(function inicio(){
 	      <option value="be_leca">Leche en caja</option>
 	      <option value="be_lepo">Leche en polvo</option>
 	      <option value="be_paes">Pañales</option>
-	      <option value="be_tohu">Toallas Humedas</option>     
+	      <option value="be_toas">Toallas Humedas</option>     
 	    </select>
 	    <label for="PrecioBebes">Precio:</label>
 	    <input type="text" value="" name="PrecioBebes" id="PrecioBebes">	    
 	  </fieldset>
 	  <input type="button" value="Registrar gasto" id="btnRgBE" name="btnRgBE"> 
+	  <div id="respOPBebes"></div>
+      </div>      
+      <div data-role="collapsible">
+	  <h1>Casa</h1>
+	  <fieldset class="ui-field-contain">
+	    <label for="opCasa">Selecciona una opción:</label>
+	    <select name="opCasa" id="opCasa">
+	      <option value="ca_gas">Gas</option>
+	      <option value="ca_reta">Renta</option>     
+	    </select>
+	    <label for="PrecioCasa">Precio:</label>
+	    <input type="text" value="" name="PrecioCasa" id="PrecioCasa">	    
+	  </fieldset>
+	  <input type="button" value="Registrar gasto" id="btnRgCASA" name="btnRgCASA">
+	  <div id="respOPCasa"></div>
       </div>
+      
       <div data-role="collapsible">
 	  <h1>Comida</h1>
 	  <fieldset class="ui-field-contain">
 	    <label for="opComida">Selecciona una opción:</label>
 	    <select name="opComida" id="opComida">
-	      <option value="com_acte">Aceite</option>
+	      <option value="com_acte">Aceite cocina</option>
 	      <option value="com_agem">Agua embotellada</option>
 	      <option value="com_aroz">Arroz</option>
 	      <option value="com_azar">Azucar</option>
@@ -149,12 +233,13 @@ $(document).ready(function inicio(){
 	    <input type="text" value="" name="PrecioComida" id="PrecioComida">	    
 	  </fieldset>
 	  <input type="button" value="Registrar gasto" id="btnRegCo" name="btnRegCo"> 
+	  <div id="respOPComida"></div>
       </div>
       <div data-role="collapsible">
 	  <h1>Limpieza</h1>
 	  <fieldset class="ui-field-contain">
-	    <label for="opComida">Selecciona una opción:</label>
-	    <select name="opComida" id="opComida">
+	    <label for="opLimpieza">Selecciona una opción:</label>
+	    <select name="opLimpieza" id="opLimpieza">
 	      <option value="li_clro">Cloro</option>
 	      <option value="li_jaro">Jabón de Ropa</option>
 	      <option value="li_jatr">Jabón de Trastes</option>      
@@ -163,6 +248,7 @@ $(document).ready(function inicio(){
 	    <input type="text" value="" name="PrecioLimp" id="PrecioLimp">	    
 	  </fieldset>
 	  <input type="button" value="Registrar gasto" id="btnRgLI" name="btnRgLI"> 
+	  <div id="respOPLimpieza"></div>
       </div>
   </div>
   <div data-role="footer">
@@ -173,7 +259,7 @@ $(document).ready(function inicio(){
 <div data-role="page" id="RegistrarIngresos" data-theme="a">
   <div data-role="header" >
     <p style="text-align:center">Registrar Ingresos</p>
-    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Inicio</a> 
   </div>
   <div data-role="content">      	  
 	  <a href="#" data-role="button" id="">Registrar Ingresos</a>	 	  
@@ -186,7 +272,7 @@ $(document).ready(function inicio(){
 <div data-role="page" id="ConsultarGastos" data-theme="a">
   <div data-role="header" >
     <p style="text-align:center">Consultar Gastos</p>
-    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Inicio</a> 
   </div>
   <div data-role="content">      	  
 	  <a href="#" data-role="button" id="">Consultar gastos</a>	 	  
@@ -199,7 +285,7 @@ $(document).ready(function inicio(){
 <div data-role="page" id="ConsultarIngresos" data-theme="a">
   <div data-role="header" >
     <p style="text-align:center">Consultar Ingresos</p>
-    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Inicio</a> 
   </div>
   <div data-role="content">      	  
 	  <a href="#" data-role="button" id="">Consultar Ingresos</a>	 	  
@@ -212,7 +298,7 @@ $(document).ready(function inicio(){
 <div data-role="page" id="BalanceGeneral" data-theme="a">
   <div data-role="header" >
     <p style="text-align:center">Balance General</p>
-    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Inicio</a> 
   </div>
   <div data-role="content">      	  
 	  <a href="#" data-role="button" id="">Balance General</a>	 	  
@@ -225,7 +311,7 @@ $(document).ready(function inicio(){
 <div data-role="page" id="InfoFamiliar" data-theme="a">
   <div data-role="header" >
     <p style="text-align:center">Información Familiar</p>
-    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Menú Principal</a> 
+    <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Inicio</a> 
   </div>
   <div data-role="content">      	  
 	  <div id="respInfoFam"></div>
