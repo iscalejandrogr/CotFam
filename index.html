@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="css/jquery-ui.css" />
 <script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.js"></script>
 <script src="js/jquery.mobile-1.4.5.min.js"></script>
 <title>Aplicación Móvil</title>
 <script type="text/javascript">
@@ -109,6 +111,58 @@ $(document).ready(function inicio(){
   var x=$("#respOPLimpieza");
   x.html(datos);
   } 
+  
+  var btnConsGastos=$("#btnConsGastos");//Consultar Gastos
+  btnConsGastos.click(function consGastos(){
+  $.ajax({
+  type:"POST",
+  url:"http://itslmoviles.260mb.net/consGastosTot.php",
+  success:recepConsultGastos
+  });
+  function recepConsultGastos(datos){
+  //alert(datos);
+  var gastos=$.parseJSON(datos);
+  var resConsGastos=$("#resConsGastos");
+  resConsGastos.html("");
+  resConsGastos.append('<table id="tabladatProd">');
+ var tab=$("#tabladatProd");
+ tab.html('<tr style="color:white; background-color:black;" ><th> Total Gastado</th></tr>');
+ for(var i in gastos){
+ tab.append(
+ "<tr><td>" +gastos[i].TotalGastos+ "</td></tr>");
+ }
+tab.append("</table>");
+  }
+  });
+  
+  var btnConsGastosFechas=$("#btnConsGastos");//Consultar Gastos por fechas
+  btnConsGastosFechas.click(function consGastosfech(){
+  $.ajax({
+  type:"POST",
+  url:"http://itslmoviles.260mb.net/consGastosFecha.php",
+  success:recepConsultGastosFecha
+  });
+  function recepConsultGastosFecha(datos){
+  //alert(datos);
+  var gastos=$.parseJSON(datos);
+  var resConsGastos=$("#resConsGastos");
+  resConsGastos.html("");
+  resConsGastos.append('<table id="tabladatProd">');
+ var tab=$("#tabladatProd");
+ tab.html('<tr style="color:white; background-color:black;" ><th> Id </th><th> Producto </th><th> Precio </th><th> Fecha </th></tr>');
+ for(var i in gastos){
+ tab.append(
+ "<tr><td>" +gastos[i].idgastos+ "</td> "
+ +"<td>" +gastos[i].Clasif_gastos_Clave_gasto+ "</td>"
+ +"<td>" +gastos[i].Precio+ "</td>"
+ +"<td>" +gastos[i].Fecha+" </td></tr>");
+ }
+tab.append("</table>");
+  }
+  });
+  
+  var fechaPic=$("#fechaPic");
+  fechaPic.datepicker();
 });
 
 </script>
@@ -274,8 +328,23 @@ $(document).ready(function inicio(){
     <p style="text-align:center">Consultar Gastos</p>
     <a href="#MenuPrincipal" data-role="button" data-icon="true" class="ui-btn ui-icon-home ui-btn-icon-left">Inicio</a> 
   </div>
-  <div data-role="content">      	  
-	  <a href="#" data-role="button" id="">Consultar gastos</a>	 	  
+  <div data-role="content"> 
+     <div data-role="collapsible">
+	  <h1>Cantidad Total Gastada</h1>
+	  <fieldset class="ui-field-contain">
+	     <input type="button" id="btnConsGastos" value="Consultar gastos" >
+	     <div id="resConsGastos"></div>
+	  </fieldset>
+      </div>
+      <div data-role="collapsible">
+	  <h1>Gastos por Fecha</h1>
+	  <fieldset class="ui-field-contain"> 
+	      <input data-role="date" id="fechaPic" type="text">
+	     <input type="button" id="btnConsGastosFecha" value="Consultar gastos" >
+	     <div id="resConsGastosFecha"></div>
+	  </fieldset>
+      </div>
+      
   </div>
   <div data-role="footer">
   <p style="text-align:center; font-size:10px;">Derechos resevados</p>
